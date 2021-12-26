@@ -1,0 +1,39 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.que{
+    font-size:3rem;
+}
+
+.option{
+    padding-left: 10px;
+    font-size:2.5rem;   
+}
+
+.radio-div{
+    display: flex;
+    align-items: center;
+}
+.radio{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    
+    
+}
+
+input{
+    padding: 10px;
+}
+
+.question_number_header{
+    display: inline-block;
+    border: 1px solid #00c3ff;
+    padding: 10px 0;
+    padding-right: 20px;
+    font-size:2rem;
+
+
+}

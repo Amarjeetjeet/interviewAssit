@@ -1,0 +1,85 @@
+<?php
+
+include "header.php";
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="blog.css?v=<?php echo time(); ?>">
+    <title>Blog</title>
+</head>
+<body>
+    <div class="link">
+
+        <a href="upload-post.php?id=<?php 
+   echo $_SESSION['user_id'];
+   if(!isset($_SESSION['user_id'])){
+       header("Location: http://localhost/project/login.php");
+    }
+    ?>" class="upload_post_link">Upload post</a>
+    </div>
+
+    <?php 
+
+
+include "connection.php";
+
+// $sql = "SELECT * FROM post order by  post_id desc";
+
+$sql = "SELECT *
+FROM post
+INNER JOIN users ON post.author= users.id";
+
+
+$result = mysqli_query($conn,$sql);
+
+if(mysqli_num_rows($result) <= 0 ){
+    echo "<p>No records found</p>";
+    
+    
+}
+else{
+
+    while($row = mysqli_fetch_assoc($result)){
+        echo "<br>";
+        $image = $row['post_img'];
+       
+        ?>
+
+        <div class="blog">
+            <div class="img">
+
+                <img class="" src="upload/<?php echo $image; ?>" width="150" height="150" alt="Blog post">
+            </div>
+
+            <div class="blog_content">
+
+                <?php 
+                if($row['author']==$_SESSION['user_id']){
+                    echo  "<a href='Delete-post.php?id={$row['post_id']}' class='btn'>Delete</a>";
+                    echo  "<a href='Delete-post.php?id={$row['post_id']}' class='btn'>Update</a>";
+                }
+                ?>
+                <a href="Catogory" class="btn"> <?php echo $row['category']; ?></a>
+                <p class="Title"> <?php echo $row['title']; ?></p>
+                <p class="Description"> <?php echo $row['description']; ?></p>
+                <p class="Author"> <?php echo $row['username']; ?></p>
+                <p class="post_time"> <?php echo $row['post_date']; ?></p>
+            </div>
+        </div>
+      
+
+<?php
+}
+}
+ 
+?>
+
+
+</body>
+</html>
+

@@ -1,2 +1,3 @@
 # interviewAssit
-It help you to crack your coding interview
+It help you to crack your coding interview 
+lets crack it
